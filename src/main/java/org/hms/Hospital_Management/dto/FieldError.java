@@ -1,5 +1,4 @@
 package org.hms.Hospital_Management.dto;
 
-public class FieldError {
-
+public record FieldError(String field, String errorCode, String errorMessage) {
 }

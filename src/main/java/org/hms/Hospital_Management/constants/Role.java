@@ -1,5 +1,5 @@
 package org.hms.Hospital_Management.constants;
 
-public class Role {
-
+public enum Role {
+	PATIENT, DOCTOR, ADMIN
 }
