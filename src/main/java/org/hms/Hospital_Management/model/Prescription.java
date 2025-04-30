@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,10 +24,9 @@ import lombok.Setter;
 @Table(name = "prescription")
 
 public class Prescription {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long prescription_id;
+	private Long prescriptionId;
 
 	@ManyToOne
 	@JoinColumn(name = "doctor_id", nullable = false)
@@ -43,10 +43,20 @@ public class Prescription {
 		this.doctor = doctor;
 		this.patient = patient;
 		this.description = description;
+		this.prescription_date = LocalDateTime.now();
+	}
+
+	@PrePersist
+	protected void onCreate() {
+		prescription_date = LocalDateTime.now();
 	}
 
 	@PreUpdate
-	protected void prescription_date() {
+	protected void onUpdate() {
 		prescription_date = LocalDateTime.now();
 	}
+
+//	@ManyToMany(mappedBy = "medicines")
+//	private Set<Medicine> prescriptions;
+
 }

@@ -1,13 +1,11 @@
 package org.hms.Hospital_Management.model;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -35,12 +33,10 @@ public class Medicine {
 	private LocalDate expirationDate;
 	private Integer stock;
 
-	@ManyToMany(mappedBy = "medicines")
-	private Set<Prescription> prescriptions;
-
 	public Medicine(String name, String dosage, Double price, String manufacturer, String category, Integer stock) {
 		this.name = name;
 		this.dosage = dosage;
+		this.price = price;
 		this.manufacturer = manufacturer;
 		this.category = category;
 		this.stock = stock;
@@ -48,6 +44,7 @@ public class Medicine {
 
 	@PreUpdate
 	protected void expirationDate() {
-		expirationDate = expirationDate.now();
+		expirationDate = LocalDate.now();
 	}
+
 }
