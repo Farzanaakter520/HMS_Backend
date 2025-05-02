@@ -26,16 +26,14 @@ public class Medicine {
 	private Long medicine_id;
 
 	private String name;
-	private String dosage;
 	private Double price;
 	private String manufacturer;
 	private String category;
 	private LocalDate expirationDate;
 	private Integer stock;
 
-	public Medicine(String name, String dosage, Double price, String manufacturer, String category, Integer stock) {
+	public Medicine(String name, Double price, String manufacturer, String category, Integer stock) {
 		this.name = name;
-		this.dosage = dosage;
 		this.price = price;
 		this.manufacturer = manufacturer;
 		this.category = category;
