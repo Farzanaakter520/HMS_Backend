@@ -94,7 +94,7 @@ public class AuthController {
 			userData.put("id", user.getId());
 			userData.put("email", user.getEmail());
 			userData.put("role", user.getRole());
-			userData.put("firstName", user.getName());
+			userData.put("name", user.getName());
 
 			responseData.put("user", userData);
 
