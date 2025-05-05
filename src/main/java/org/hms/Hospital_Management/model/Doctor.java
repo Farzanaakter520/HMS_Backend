@@ -1,5 +1,6 @@
 package org.hms.Hospital_Management.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "doctors")
+@Table(name = "doctor_table")
 public class Doctor {
 
 	@Id
@@ -20,6 +21,8 @@ public class Doctor {
 
 	private String name;
 	private String department;
+
+	@Column(unique = true)
 	private String email;
 	private String degree;
 	private String address;
