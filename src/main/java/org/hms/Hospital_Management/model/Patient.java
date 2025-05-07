@@ -7,11 +7,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "patients")
 public class Patient {
@@ -31,6 +35,7 @@ public class Patient {
 
 	public Patient(String name, Integer age, String gender, String bloodGroup, String address, String phone,
 			String email, LocalDate date) {
+
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
@@ -39,5 +44,6 @@ public class Patient {
 		this.phone = phone;
 		this.email = email;
 		this.date = date;
+
 	}
 }
