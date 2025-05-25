@@ -2,6 +2,7 @@ package org.hms.Hospital_Management.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,33 +17,25 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "appointment")
-public class Appointment {
+@Table(name = "t_appointment")
 
+public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long appointmentId;
+	private Long id;
 
-	private String name;
 	@ManyToOne
-	@JoinColumn(name = "patient_id", nullable = false)
+	@JoinColumn(name = "patient_id", nullable = false, referencedColumnName = "id")
 	private User patient;
 
 	@ManyToOne
-	@JoinColumn(name = "doctor_id", nullable = false)
+	@JoinColumn(name = "doctor_id", nullable = false, referencedColumnName = "id")
 	private User doctor;
 
-	private String email;
-	private LocalDateTime appointmentDate;
+	@Column(nullable = false)
+	private LocalDateTime scheduledTime;
 
-	public Appointment(String name, User patient, User doctor, String email) {
-		this.name = name;
-		this.patient = patient;
-		this.doctor = doctor;
-		this.email = email;
-
-	}
 }

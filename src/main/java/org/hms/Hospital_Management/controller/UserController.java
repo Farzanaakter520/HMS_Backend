@@ -32,7 +32,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
 	private final UserService userService;
@@ -67,10 +67,18 @@ public class UserController {
 	}
 
 	@PostMapping
-	@PreAuthorize("hasRole('ADMIN')")
+//	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreateRequest userCreateRequest) {
-		User user = new User(userCreateRequest.email(), userCreateRequest.password(), userCreateRequest.role(),
-				userCreateRequest.name(), userCreateRequest.phoneNumber());
+		User user = new User(userCreateRequest.email()
+				, userCreateRequest.password()
+				, userCreateRequest.role(),
+				userCreateRequest.name()
+				, userCreateRequest.phoneNumber()
+				, userCreateRequest.dob()
+				,userCreateRequest.age()
+				,userCreateRequest.gender()
+				, userCreateRequest.speciality()
+				, userCreateRequest.avatarUrl());
 
 		User createdUser = userService.createUser(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(convertToDTO(createdUser));
@@ -86,6 +94,14 @@ public class UserController {
 			userDetails.setName(userUpdateRequest.name());
 			userDetails.setEmail(userUpdateRequest.email());
 			userDetails.setPhoneNumber(userUpdateRequest.phoneNumber());
+			userDetails.setAge(userUpdateRequest.age());
+			userDetails.setDob(userUpdateRequest.dob());
+			userDetails.setSpeciality(userUpdateRequest.speciality());
+			userDetails.setGender(userUpdateRequest.gender());
+			userDetails.setAvatarUrl(userUpdateRequest.avatarUrl());
+
+
+
 
 			// Only admin can update roles
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -143,9 +159,13 @@ public class UserController {
 		dto.setId(user.getId());
 		dto.setEmail(user.getEmail());
 		dto.setRole(user.getRole());
-
 		dto.setName(user.getName());
 		dto.setPhoneNumber(user.getPhoneNumber());
+		dto.setAge(user.getAge());
+		dto.setDob(user.getDob());
+		dto.setSpeciality(user.getSpeciality());
+		dto.setGender(user.getGender());
+		dto.setAvatarUrl(user.getAvatarUrl());
 		dto.setCreatedAt(user.getCreatedAt());
 		dto.setUpdatedAt(user.getUpdatedAt());
 		return dto;

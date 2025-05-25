@@ -1,6 +1,7 @@
 package org.hms.Hospital_Management.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,10 +32,10 @@ public class Patient {
 	private String address;
 	private String phone;
 	private String email;
-	private LocalDate date;
+	private LocalDateTime admitDate;
 
 	public Patient(String name, Integer age, String gender, String bloodGroup, String address, String phone,
-			String email, LocalDate date) {
+			String email) {
 
 		this.name = name;
 		this.age = age;
@@ -43,7 +44,7 @@ public class Patient {
 		this.address = address;
 		this.phone = phone;
 		this.email = email;
-		this.date = date;
+		this.admitDate = LocalDateTime.now();
 
 	}
 }

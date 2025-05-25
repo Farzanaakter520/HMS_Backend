@@ -45,6 +45,12 @@ public class User {
 
 	private String name;
 	private String phoneNumber;
+	private String dob;
+	private Integer age;
+	private String gender;
+	private String speciality;
+	private String avatarUrl;
+	
 
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
@@ -52,13 +58,17 @@ public class User {
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 
-	public User(String email, String password, Role role, String name, String phoneNumber) {
+	public User(String email, String password, Role role, String name, String phoneNumber,String dob, Integer age, String gender, String speciality, String avatarUrl) {
 		this.email = email;
 		this.password = password;
 		this.role = role;
 		this.name = name;
-
 		this.phoneNumber = phoneNumber;
+		this.dob = dob;
+		this.age = age;
+		this.gender = gender;
+		this.speciality = speciality;
+		this.avatarUrl = avatarUrl;
 	}
 
 	@PrePersist

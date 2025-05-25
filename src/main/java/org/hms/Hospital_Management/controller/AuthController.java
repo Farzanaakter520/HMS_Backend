@@ -50,7 +50,8 @@ public class AuthController {
 	public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
 		try {
 			User user = new User(registerRequest.email(), registerRequest.password(), registerRequest.role(),
-					registerRequest.name(), registerRequest.phoneNumber());
+					registerRequest.name(), registerRequest.phoneNumber(),registerRequest.dob(),
+					registerRequest.age(),  registerRequest.gender(), registerRequest.speciality(), registerRequest.avatarUrl() );
 
 			User savedUser = userService.createUser(user);
 
@@ -61,6 +62,12 @@ public class AuthController {
 			userResponse.setRole(savedUser.getRole());
 			userResponse.setName(savedUser.getName());
 			userResponse.setPhoneNumber(savedUser.getPhoneNumber());
+			userResponse.setAge(savedUser.getAge());
+			userResponse.setDob(savedUser.getDob());
+			userResponse.setGender(savedUser.getGender());
+			userResponse.setSpeciality(savedUser.getSpeciality());
+			userResponse.setAvatarUrl(savedUser.getAvatarUrl());
+
 			userResponse.setCreatedAt(savedUser.getCreatedAt());
 			userResponse.setUpdatedAt(savedUser.getUpdatedAt());
 

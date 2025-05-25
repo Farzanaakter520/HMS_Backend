@@ -6,5 +6,10 @@ import jakarta.validation.constraints.Email;
 
 public record UserUpdateRequest(@Email(message = "Email should be valid") String email,
 
-		Role role, String name, String phoneNumber) {
+		Role role, String name, String phoneNumber,
+		String dob,
+		 Integer age,
+		 String gender,
+		 String speciality,
+		 String avatarUrl) {
 }

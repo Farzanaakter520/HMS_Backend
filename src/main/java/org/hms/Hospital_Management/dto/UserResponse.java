@@ -14,6 +14,11 @@ public class UserResponse {
 	private String email;
 	private Role role;
 	private String name;
+	private String dob;
+	private Integer age;
+	private String gender;
+	private String speciality;
+	private String avatarUrl;
 
 	private String phoneNumber;
 	private LocalDateTime createdAt;
