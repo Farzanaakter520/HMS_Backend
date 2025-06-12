@@ -22,5 +22,6 @@ public record UserCreateRequest(
 		 Integer age,
 		 String gender,
 		 String speciality,
+		 String bloodGroup,
 		 String avatarUrl) {
 }

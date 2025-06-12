@@ -11,5 +11,6 @@ public record UserUpdateRequest(@Email(message = "Email should be valid") String
 		 Integer age,
 		 String gender,
 		 String speciality,
+		 String bloodGroup,
 		 String avatarUrl) {
 }

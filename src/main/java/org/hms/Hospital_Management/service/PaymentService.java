@@ -26,8 +26,7 @@ public class PaymentService {
 		Appointment appointment = appointmentRepository.findById(dto.getAppointmentID())
 				.orElseThrow(() -> new RuntimeException("Appointment not found"));
 
-		Payment payment = new Payment(appointment, dto.getAmount(), dto.getPaymentMethod(),
-				dto.getStatus() != null ? dto.getStatus() : PaymentStatus.UNPAID, LocalDateTime.now());
+		Payment payment = new Payment(appointment, dto.getAmount(), dto.getPaymentMethod(), LocalDateTime.now());
 
 		return convertToDto(paymentRepository.save(payment));
 	}
@@ -58,6 +57,6 @@ public class PaymentService {
 
 	private PaymentDto convertToDto(Payment payment) {
 		return new PaymentDto(payment.getAppointment().getId(), payment.getAmount(), payment.getPaymentMethod(),
-				payment.getStatus(), payment.getPaidAt());
+				 payment.getPaidAt());
 	}
 }

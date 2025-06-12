@@ -18,7 +18,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -54,31 +54,28 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('ADMIN') or @userSecurity.hasUserId(authentication, #id)")
+//	@PreAuthorize("hasRole('ADMIN') or @userSecurity.hasUserId(authentication, #id)")
 	public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
 		return userService.getUserById(id).map(user -> ResponseEntity.ok(convertToDTO(user)))
 				.orElse(ResponseEntity.notFound().build());
 	}
 
-	@GetMapping("/role/{role}")
-	@PreAuthorize("hasRole('ADMIN')")
-	public List<UserResponse> getUsersByRole(@PathVariable Role role) {
+	@GetMapping("/role")
+	public List<UserResponse> getUsersByRole(@RequestParam Role role) {
+		return userService.getUsersByRole(role).stream().map(this::convertToDTO).collect(Collectors.toList());
+	}
+	
+	@GetMapping("/public/role")
+	public List<UserResponse> getUsersByRolePublic(@RequestParam Role role) {
 		return userService.getUsersByRole(role).stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
 
 	@PostMapping
-//	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreateRequest userCreateRequest) {
-		User user = new User(userCreateRequest.email()
-				, userCreateRequest.password()
-				, userCreateRequest.role(),
-				userCreateRequest.name()
-				, userCreateRequest.phoneNumber()
-				, userCreateRequest.dob()
-				,userCreateRequest.age()
-				,userCreateRequest.gender()
-				, userCreateRequest.speciality()
-				, userCreateRequest.avatarUrl());
+		User user = new User(userCreateRequest.email(), userCreateRequest.password(), userCreateRequest.role(),
+				userCreateRequest.name(), userCreateRequest.phoneNumber(), userCreateRequest.dob(),
+				userCreateRequest.age(), userCreateRequest.gender(), userCreateRequest.speciality(),userCreateRequest.bloodGroup(),
+				userCreateRequest.avatarUrl());
 
 		User createdUser = userService.createUser(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(convertToDTO(createdUser));
@@ -96,12 +93,12 @@ public class UserController {
 			userDetails.setPhoneNumber(userUpdateRequest.phoneNumber());
 			userDetails.setAge(userUpdateRequest.age());
 			userDetails.setDob(userUpdateRequest.dob());
-			userDetails.setSpeciality(userUpdateRequest.speciality());
+			
 			userDetails.setGender(userUpdateRequest.gender());
+			userDetails.setSpeciality(userUpdateRequest.speciality());
+			userDetails.setBloodGroup(userUpdateRequest.bloodGroup());
+
 			userDetails.setAvatarUrl(userUpdateRequest.avatarUrl());
-
-
-
 
 			// Only admin can update roles
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

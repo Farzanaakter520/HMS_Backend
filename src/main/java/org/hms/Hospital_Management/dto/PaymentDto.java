@@ -17,7 +17,6 @@ public class PaymentDto {
 	private Long appointmentID;
 	private Double amount;
 	private String paymentMethod;
-	private PaymentStatus status;
 	private LocalDateTime paidAt;
 
 }

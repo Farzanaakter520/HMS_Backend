@@ -36,18 +36,15 @@ public class Payment {
 
 	private String paymentMethod;
 
-	private PaymentStatus status;
-
 	private LocalDateTime paidAt;
 
 
-	public Payment(Appointment appointment, Double amount, String paymentMethod, PaymentStatus status,
+	public Payment(Appointment appointment, Double amount, String paymentMethod,
 			LocalDateTime paidAt) {
 		this.appointment = appointment;
 		
 		this.amount = amount;
 		this.paymentMethod = paymentMethod;
-		this.status = status;
 		this.paidAt = paidAt;
 	}
 

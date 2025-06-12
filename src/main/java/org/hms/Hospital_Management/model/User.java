@@ -49,6 +49,9 @@ public class User {
 	private Integer age;
 	private String gender;
 	private String speciality;
+	private String bloodGroup;
+	
+	@Column(length = 500)
 	private String avatarUrl;
 	
 
@@ -58,7 +61,7 @@ public class User {
 	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
 
-	public User(String email, String password, Role role, String name, String phoneNumber,String dob, Integer age, String gender, String speciality, String avatarUrl) {
+	public User(String email, String password, Role role, String name, String phoneNumber,String dob, Integer age, String gender, String speciality,String bloodGroup, String avatarUrl) {
 		this.email = email;
 		this.password = password;
 		this.role = role;
@@ -68,6 +71,7 @@ public class User {
 		this.age = age;
 		this.gender = gender;
 		this.speciality = speciality;
+		this.bloodGroup = bloodGroup;
 		this.avatarUrl = avatarUrl;
 	}
 

@@ -18,6 +18,7 @@ public class UserResponse {
 	private Integer age;
 	private String gender;
 	private String speciality;
+	private String bloodGroup;
 	private String avatarUrl;
 
 	private String phoneNumber;

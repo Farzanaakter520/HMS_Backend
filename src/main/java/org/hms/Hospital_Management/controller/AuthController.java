@@ -51,7 +51,7 @@ public class AuthController {
 		try {
 			User user = new User(registerRequest.email(), registerRequest.password(), registerRequest.role(),
 					registerRequest.name(), registerRequest.phoneNumber(),registerRequest.dob(),
-					registerRequest.age(),  registerRequest.gender(), registerRequest.speciality(), registerRequest.avatarUrl() );
+					registerRequest.age(),  registerRequest.gender(), registerRequest.speciality(),registerRequest.bloodGroup(), registerRequest.avatarUrl() );
 
 			User savedUser = userService.createUser(user);
 
@@ -66,6 +66,8 @@ public class AuthController {
 			userResponse.setDob(savedUser.getDob());
 			userResponse.setGender(savedUser.getGender());
 			userResponse.setSpeciality(savedUser.getSpeciality());
+			userResponse.setBloodGroup(savedUser.getBloodGroup());
+
 			userResponse.setAvatarUrl(savedUser.getAvatarUrl());
 
 			userResponse.setCreatedAt(savedUser.getCreatedAt());
