@@ -20,12 +20,16 @@ public class Doctor {
 	private Long id;
 
 	private String name;
+
 	private String department;
 
 	@Column(unique = true)
 	private String email;
+
 	private String degree;
+
 	private String address;
+
 	private Double salary;
 
 	public Doctor(String name, String department, String email, String degree, String address, Double salary) {
