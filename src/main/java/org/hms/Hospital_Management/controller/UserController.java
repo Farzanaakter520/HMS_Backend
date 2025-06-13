@@ -48,13 +48,13 @@ public class UserController {
 	}
 
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')")
+//	@PreAuthorize("hasRole('ADMIN')")
 	public List<UserResponse> getAllUsers() {
 		return userService.getAllUsers().stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
 
 	@GetMapping("/{id}")
-//	@PreAuthorize("hasRole('ADMIN') or @userSecurity.hasUserId(authentication, #id)")
+	@PreAuthorize("hasRole('ADMIN') or @userSecurity.hasUserId(authentication, #id)")
 	public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
 		return userService.getUserById(id).map(user -> ResponseEntity.ok(convertToDTO(user)))
 				.orElse(ResponseEntity.notFound().build());
