@@ -15,12 +15,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PrescriptionDTO {
 
-    @JsonProperty("doctor_id")
+    @JsonProperty("doctorId")
     private Long doctorId;
 
-    private String doctorName;
+    private String doctorName; 
 
-    @JsonProperty("patient_id")
+    @JsonProperty("patientId")
     private Long patientId;
 
     private String patientName;

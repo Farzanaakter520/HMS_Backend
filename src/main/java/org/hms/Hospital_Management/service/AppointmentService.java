@@ -64,4 +64,11 @@ public class AppointmentService {
 		dto.setScheduledTime(appointment.getScheduledTime());
 		return dto;
 	}
+
+	public List<AppointmentDTO> getAppointmentSByDoctorId(Long id) {
+		
+		List<Appointment> applist = appointmentRepository.findAllByDoctorId(id);
+		
+		return applist.stream().map(this::convertToDTO).collect(Collectors.toList());
+	}
 }

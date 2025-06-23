@@ -54,7 +54,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('ADMIN') or @userSecurity.hasUserId(authentication, #id)")
+//	@PreAuthorize("hasRole('ADMIN') or @userSecurity.hasUserId(authentication, #id)")
 	public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
 		return userService.getUserById(id).map(user -> ResponseEntity.ok(convertToDTO(user)))
 				.orElse(ResponseEntity.notFound().build());

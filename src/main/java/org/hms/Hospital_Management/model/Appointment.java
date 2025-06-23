@@ -20,7 +20,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "t_appointment")
+@Table(name = "t_appointments")
 
 public class Appointment {
 	@Id
@@ -28,11 +28,11 @@ public class Appointment {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "patient_id", nullable = false, referencedColumnName = "id")
+	@JoinColumn(name = "patientId", nullable = false, referencedColumnName = "id")
 	private User patient;
 
 	@ManyToOne
-	@JoinColumn(name = "doctor_id", nullable = false, referencedColumnName = "id")
+	@JoinColumn(name = "doctorId", nullable = false, referencedColumnName = "id")
 	private User doctor;
 
 	@Column(nullable = false)
